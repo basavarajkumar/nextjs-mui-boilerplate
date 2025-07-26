@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import * as React from "react";
 import { ThemeProvider } from "@mui/material";
 import theme from "../theme";
-import { Roboto } from "next/font/google";
+import { Roboto, Inter } from "next/font/google";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -11,6 +11,13 @@ const roboto = Roboto({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-roboto",
+});
+
+const inter = Inter({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +30,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  console.log("RootLayout---");
   return (
     <html lang="en">
       <head>
@@ -34,15 +40,19 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="true"
         />
-        <link
+        {/* <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+        /> */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+          rel="stylesheet"
         />
       </head>
       <body>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
-            <main className={roboto.variable}>{children}</main>
+            <main>{children}</main>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

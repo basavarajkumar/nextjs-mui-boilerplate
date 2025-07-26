@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Layout from "components/mui/Layout";
+import Layout from "components/Layout";
 import Link from "next/link";
 
 export default function App() {

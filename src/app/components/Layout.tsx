@@ -14,10 +14,13 @@ import {
 } from "@mui/material";
 // import InboxIcon from '@mui/icons-material/Inbox';
 // import MailIcon from '@mui/icons-material/Mail';
+import Link from "next/link";
+import { useTheme } from "@mui/material/styles";
 
 const drawerWidth = 240;
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const theme = useTheme();
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -36,24 +39,27 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {/* Sidebar */}
       <Drawer
         variant="permanent"
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
+        sx={[
+          (theme) => ({
             width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: {
+              width: drawerWidth,
+              boxSizing: "border-box",
+              backgroundColor: theme.drawer.open,
+            },
+          }),
+        ]}
       >
         <Toolbar />
         <Box sx={{ overflow: "auto" }}>
           <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem button key={text}>
+            {["MUI", "Starred", "Send email", "Drafts"].map((text, index) => (
+              <ListItem key={text}>
                 {/* <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon> */}
-                <ListItemText primary={text} />
+                <Link href={`/${text}`}>{text}</Link>
               </ListItem>
             ))}
           </List>
@@ -66,7 +72,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         sx={{
           flexGrow: 1,
           p: 3,
-          ml: `${drawerWidth}px`,
           height: "100vh",
           overflowY: "auto",
         }}
